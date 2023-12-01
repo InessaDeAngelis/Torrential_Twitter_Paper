@@ -47,3 +47,10 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
+
+# DS store
+**/.DS_Store
+
+# All Data
+/Inputs/Data
+/Outputs/Data

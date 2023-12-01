@@ -1,0 +1,24 @@
+---
+title: "Torrential Twitter: Climate Change, Female Politicians, and Harassment"
+author: "Inessa De Angelis"
+format:
+  beamer:
+    aspectratio: 169
+    theme: Madrid
+    colortheme: DarkBlue
+    institute: The University of Toronto
+    # toc: true
+    # Table of contents not generating at the moment
+editor: visual
+header-includes: 
+- \definecolor{DarkBlue}{rgb}{0.05, 0.15, 0.3}
+- \setbeamercolor{structure}{fg=DarkBlue}
+---
+
+# Introduction
+
+Hello!
+
+------------------------------------------------------------------------
+
+# Slide 2
