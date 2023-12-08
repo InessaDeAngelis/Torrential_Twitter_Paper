@@ -51,6 +51,5 @@ rsconnect/
 # DS store
 **/.DS_Store
 
-# All Data
+# All raw data
 /Inputs/Data
-/Outputs/Data
