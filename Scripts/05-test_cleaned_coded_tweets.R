@@ -5,7 +5,7 @@
 # Contact: inessa.deangelis@mail.utoronto.ca 
 # License: MIT
 # Pre-requisites
-# 01-clean_coded_tweets.R
+  # 01-clean_coded_tweets.R
 
 #### Workspace setup ####
 library(testthat)
