@@ -1,24 +1,44 @@
 ---
 title: "Torrential Twitter: Climate Change, Female Politicians, and Harassment"
-author: "Inessa De Angelis"
+author: 
+  name: "Inessa De Angelis"
+  email: "Inessa.DeAngelis@mail.utoronto.ca"
 format:
-  beamer:
-    aspectratio: 169
-    theme: Madrid
-    colortheme: DarkBlue
-    institute: The University of Toronto
-    # toc: true
-    # Table of contents not generating at the moment
-editor: visual
-header-includes: 
-- \definecolor{DarkBlue}{rgb}{0.05, 0.15, 0.3}
-- \setbeamercolor{structure}{fg=DarkBlue}
+  revealjs
+title-slide-attributes: 
+  data-background-color: "#CBD6BE"
 ---
 
-# Introduction
+## Background {background-color="#CBD6BE"}
+- Harassment on Twitter is well-documented
 
-Hello!
+```{r}
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+library(ggplot2)
+library(formattable)
+library(here)
 
-------------------------------------------------------------------------
+# Read in the data #
+finalized_cleaned_tweets_anon <- read_csv(here::here("Outputs/Data/finalized_cleaned_tweets_anon.csv"))
+show_col_types = FALSE
 
-# Slide 2
+#| message: false
+#| eval: true
+#| echo: false
+#| label: tbl-breakdown
+#| tbl-cap: Number of Tweets and their overall percentage of the sample by female politician following the data cleaning process
+
+finalized_cleaned_tweets_anon |>
+  group_by(name_of_politician) |>
+  count() |>
+  ungroup() |>
+  mutate(pct = paste0(round((n / sum(n)) * 100), "%")) |>
+  arrange(match(name_of_politician, c('Chrystia Freeland', 'Elizabeth May', 'Laurel Collins'))) |>
+  kable(
+    col.names = c("Name of Politician", "Number of Replies", "Percentage"),
+    booktabs = TRUE,
+  ) 
+
+````

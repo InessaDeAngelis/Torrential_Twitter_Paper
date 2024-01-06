@@ -65,12 +65,8 @@ finalized_cleaned_tweets <-
   select(ID, name_of_politician, name, verified, bio, username, tweet_text, severity_of_harassment, type_of_account)
 finalized_cleaned_tweets
 
-#### Save cleaned data in CSV file format ####
+#### Save cleaned data ####
 write_csv(
   x = finalized_cleaned_tweets,
-  file = "Outputs//Data/finalized_cleaned_tweets.csv"
+  file = "Outputs/Data/finalized_cleaned_tweets.csv"
 )
-
-finalized_cleaned_tweets |>
-  group_by(type_of_account) |>
-  count()

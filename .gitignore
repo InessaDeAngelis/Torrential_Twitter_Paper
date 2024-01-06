@@ -51,5 +51,6 @@ rsconnect/
 # DS store
 **/.DS_Store
 
-# All raw data
+# All identifiable data
 /Inputs/Data
+/Outputs/Data/finalized_cleaned_tweets.csv

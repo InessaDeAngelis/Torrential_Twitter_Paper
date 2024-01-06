@@ -35,7 +35,7 @@ class(analysis_data_binary$type_of_account) == "character"
 class(analysis_data_binary$verified) == "character"
 class(analysis_data_binary$name_of_politician) == "character"
 class(analysis_data_binary$harassment_binary) == "numeric"
-nrow(analysis_data_binary) == 4100
+nrow(analysis_data_binary) == 4139
 
 #### Make Bayesian hierarchical model ####
 harassment_model <-
@@ -50,7 +50,7 @@ harassment_model <-
 verified_model
 
 ## Save model ##
-saveRDS(harassment_model, "Outputs//Model/harassment_model.rds")
+saveRDS(harassment_model, "Outputs/Model/harassment_model.rds")
 
 ## Summary ##
 summary(harassment_model)
