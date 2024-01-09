@@ -1094,5 +1094,5 @@ cleaned_laurel_tweets
 final_cleaned_laurel_tweets <- filter(cleaned_laurel_tweets, User_id != "2167166754")   
 final_cleaned_laurel_tweets
 
-# After allllll those steps, save Tweets to test before manually coding! #
+# Save Tweets #
 write_csv(x = final_cleaned_laurel_tweets, file = "Outputs/Data/Laurel/final_cleaned_laurel_tweets.csv")

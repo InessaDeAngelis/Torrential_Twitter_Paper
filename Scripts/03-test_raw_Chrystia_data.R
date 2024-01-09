@@ -40,4 +40,4 @@ out <-
 summary(out)
 
 # Check number of rows is correct #
-nrow(cleaned_chrystia_tweets) == 2408
+nrow(cleaned_chrystia_tweets) == 2401

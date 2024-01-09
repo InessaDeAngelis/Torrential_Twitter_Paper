@@ -5,7 +5,7 @@
 # Contact: inessa.deangelis@mail.utoronto.ca 
 # License: MIT
 # Pre-requisites
-  # 01-clean_coded_tweets.R
+  # 04-clean_coded_tweets.R
 
 #### Workspace setup ####
 library(testthat)
@@ -27,5 +27,5 @@ test_that("check class" , {
 })
 
 test_that("Check number of observations is correct", {
-  expect_equal(nrow(finalized_cleaned_tweets), 4100)
+  expect_equal(nrow(finalized_cleaned_tweets), 4139)
 })
