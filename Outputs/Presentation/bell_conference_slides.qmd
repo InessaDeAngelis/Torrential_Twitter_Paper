@@ -10,9 +10,32 @@ title-slide-attributes:
 ---
 
 ## Background {background-color="#CBD6BE"}
-- Harassment on Twitter is well-documented
+- Harassment of female politicians is well-documented (Wagner, 2020; Erikson et al., 2023)
+- Intersection between climate change denialism and misogyny (Anshelm & Hultman, 2014)
+- Networked publics impact speech in the digital public sphere (boyd, 2010; Bruns, 2023)
+
+## Theoretical Framework {background-color="#CBD6BE"}
+- Theory of Deliberative Democracy
+- Credited to Jürgen Habermas and Richard Sennet
+- View on a scale; "to what extent" (Rossini, 2022)
+
+## Research Questions {background-color="#CBD6BE"}
+  1. What is the severity of harassment female politicians receive when Tweeting about climate change, the environment, or related topics?
+  2. What types of accounts send harassing Tweets to female politicians?
+
+## Hypotheses {background-color="#CBD6BE"}
+  1. Evidence of harassment will be detected in replies to Tweets that discuss climate change, the environment, or related topics.
+  2. Personal and Anonymous accounts belonging to right-wing and ideologically-driven users will send Tweets containing the most harassment to the female politicians.
+  
+## Methods {background-color="#CBD6BE"}
+- Statistical programming software `R` (R Core Team, 2023)
+- R Package for collecting Twitter threaded conversations: `voson.tcn` (Gertzel, 2021)
+- Manual coding using a Google Form
+
+## My Sample {background-color="#CBD6BE"}
 
 ```{r}
+# Set up #
 library(tidyverse)
 library(knitr)
 library(kableExtra)
@@ -21,7 +44,7 @@ library(formattable)
 library(here)
 
 # Read in the data #
-finalized_cleaned_tweets_anon <- read_csv(here::here("Outputs/Data/finalized_cleaned_tweets_anon.csv"))
+finalized_cleaned_tweets <- read_csv(here::here("Outputs/Data/finalized_cleaned_tweets.csv"))
 show_col_types = FALSE
 
 #| message: false
@@ -30,7 +53,7 @@ show_col_types = FALSE
 #| label: tbl-breakdown
 #| tbl-cap: Number of Tweets and their overall percentage of the sample by female politician following the data cleaning process
 
-finalized_cleaned_tweets_anon |>
+finalized_cleaned_tweets |>
   group_by(name_of_politician) |>
   count() |>
   ungroup() |>
@@ -38,7 +61,177 @@ finalized_cleaned_tweets_anon |>
   arrange(match(name_of_politician, c('Chrystia Freeland', 'Elizabeth May', 'Laurel Collins'))) |>
   kable(
     col.names = c("Name of Politician", "Number of Replies", "Percentage"),
-    booktabs = TRUE,
-  ) 
+    booktabs = TRUE) |>
+  kable_styling(font_size = 30) 
+```
 
-````
+## Severity of Harassment {background-color="#CBD6BE"}
+  1. Positive
+  2. Neutral
+  3. Questioning authority
+  4. Name-calling/Gender insults
+  5. Vicious language
+  6. Credible threats
+  7. Hate speech
+
+## Type of Account {background-color="#CBD6BE"}
+  1. Personal
+  2. Professional
+  3. Bots
+  4. Spammers
+  5. Anonymous
+  6. Suspended/deleted 
+
+## Bayesian Hierarchical Model {background-color="#CBD6BE"}
+::: {.r-fit-text}
+$$
+\begin{aligned}
+y_i|\pi_i & \sim \mbox{Bern}(\pi_i) \\
+\mbox{logit}(\pi_i) & = \beta_0 + \alpha_{a[i]}^{\mbox{account}} + \alpha_{p[i]}^{\mbox{politician}} + \alpha_{v[i]}^{\mbox{verified}} \\
+\alpha_0 & \sim \mbox{Normal}(0, 2.5)\\
+\alpha_{a}^{\mbox{acc}} & \sim \mbox{Normal}\left(0, \sigma^2_{\mbox{acc}}\right)\mbox{ for }a = 1, 2, \dots, A\\
+\alpha_{p}^{\mbox{pol}} & \sim \mbox{Normal}\left(0, \sigma^2_{\mbox{pol}}\right)\mbox{ for }p = 1, 2, 3, P\\
+\alpha_{v}^{\mbox{ver}} & \sim \mbox{Normal}\left(0, \sigma^2_{\mbox{ver}}\right)\mbox{ for }v = 0, 1, V\\
+\sigma_{\mbox{acc}} & \sim \mbox{Exponential}(1)\\
+\sigma_{\mbox{pol}} & \sim \mbox{Exponential}(1) \\
+\sigma_{\mbox{ver}} & \sim \mbox{Exponential}(1)
+\end{aligned}
+$$
+:::
+
+## Results (Model) {background-color="#CBD6BE"}
+```{r}
+#| message: false
+#| eval: true
+#| echo: false
+#| label: fig-plotted
+#| fig-cap: Predicting whether a Tweet contains harassment or not, on the basis of the type of account behind the Tweet, which politician the Tweet was in response to, and whether a user is verified.
+#| warning: false
+
+library(marginaleffects)
+library(tidyverse)
+
+harassment_model <- readRDS(here::here("Outputs/Model/harassment_model.rds"))
+
+harassment_model_predictions <-
+  predictions(harassment_model) 
+
+harassment_model_predictions |>
+  ggplot(aes(x = harassment_binary, y = estimate, color = name_of_politician)) +
+  geom_jitter(width = 0.2, height = 0.0, alpha = 0.3) +
+  labs(
+    x = "Harassment",
+    y = "Estimated probability that a Tweet contains harassment",
+    color = "Name of Politician"
+  ) +
+  theme_classic() +
+  theme(axis.text.x = element_text(angle=45, hjust = 1, size = 8)) + 
+  theme(axis.text.y = element_text(size = 8)) + 
+  theme(axis.title.y = element_text(size = 8)) +
+  theme(legend.position = "bottom") +
+  theme(legend.text = element_text(size = 6)) +
+  theme(legend.title = element_text(size = 9)) 
+
+```
+
+## Results (Coding) {background-color="#CBD6BE"}
+::: {.r-fit-text}
+```{r}
+# Kable font size fix code from: https://bookdown.org/yihui/rmarkdown-cookbook/kableextra.html
+# Set up #
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+library(ggplot2)
+library(formattable)
+library(here)
+
+# Read in the data #
+finalized_cleaned_tweets <- read_csv(here::here("Outputs/Data/finalized_cleaned_tweets.csv"))
+show_col_types = FALSE
+
+#| message: false
+#| eval: true
+#| echo: false
+#| label: tbl-breakdown
+#| tbl-cap: X
+
+finalized_cleaned_tweets |>
+  group_by(severity_of_harassment) |>
+  count() |>
+  ungroup() |>
+  mutate(pct = paste0(round((n / sum(n)) * 100), "%")) |>
+  arrange(match(severity_of_harassment, c('Positive', 'Neutral', 'Questioning Authority', 'Name-calling/Gender insults', 'Vicious language', 'Credible threats', 'Hate speech'))) |>
+  kable(
+    col.names = c("Severity of Harassment", "Number of Replies", "Percentage"),
+    booktabs = TRUE) |>
+  kable_styling(font_size = 30)
+
+```
+:::
+
+## Results (Coding) {background-color="#CBD6BE"}
+::: {.r-fit-text}
+```{r}
+# Set up #
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+library(ggplot2)
+library(formattable)
+library(here)
+
+# Read in the data #
+finalized_cleaned_tweets <- read_csv(here::here("Outputs/Data/finalized_cleaned_tweets.csv"))
+show_col_types = FALSE
+
+#| message: false
+#| eval: true
+#| echo: false
+#| label: tbl-breakdown2
+#| tbl-cap: X
+
+finalized_cleaned_tweets |>
+  group_by(type_of_account) |>
+  count() |>
+  ungroup() |>
+  mutate(pct = paste0(round((n / sum(n)) * 100), "%")) |>
+  arrange(match(type_of_account, c('Personal', 'Professional', 'Bots', 'Spammers', 'Anonymous', 'Suspended/deleted'))) |>
+  kable(
+    col.names = c("Type of Account", "Number of Accounts", "Percentage"),
+    booktabs = TRUE) |>
+  kable_styling(font_size = 30)
+
+```
+:::
+
+## Discussion: Questioning Authority {background-color="#CBD6BE"}
+| Tweet                                                                  |
+|------------------------------------------------------------------------|
+| \@ElizabethMay Do you remember the acid rain crisis - just about killed us all; then the ozone hole..how we survived? And the ice caps melting..good thing coast didn’t get submersed.  Now this time can you show legitimate science? No hey? Weird, climatologists have expertise that disagrees |
+
+: A Tweet categorized as **Questioning authority** sent to MP May.
+
+## Discussion: Type of Accounts {background-color="#CBD6BE"}
+- More Spammers and Anonymous accounts than anticipated
+- Fewer Suspended/deleted accounts 
+- Professional accounts often belonged to Federal Conservative MPs
+
+## Discussion: Hate Speech {background-color="#CBD6BE"}
+
+![Example of a reply to a Tweet sent by DPM Freeland which revives historical photographs through memes and contains **Hate Speech**](hate_speech_example.png){width="400"}
+
+## Deliberative Democracy {background-color="#CBD6BE"}
+- MP May's account best fulfills the definition
+- MP Collins' account mostly fulfills the definition 
+- DPM Freeland's account does not 
+
+## Why this matters {background-color="#CBD6BE"}
+- Future of democratic conversations online
+- We cannot let female politicians self-censor or be deterred from running for office 
+- Issue salience: continued conversations about climate change in traditional and social media
+
+## Thank You {background-color="#CBD6BE" .smaller}
+- Code, select data, and paper available: <https://github.com/InessaDeAngelis/torrential_twitter_bell_conf>
+- Questions, comments, and feedback welcome: <Inessa.DeAngelis@mail.utoronto.ca> 
+- Find me on GitHub & Twitter: **\@InessaDeAngelis**

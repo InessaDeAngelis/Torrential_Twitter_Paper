@@ -319,6 +319,9 @@
       margin-right: 0; 
     }
   </style>
+  
+  <script src="Bell_Conference_Slides_files/libs/kePrint-0.0.1/kePrint.js"></script>
+  <link href="Bell_Conference_Slides_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -342,11 +345,46 @@ Inessa De Angelis
 <section id="background" class="slide level2" data-background-color="#CBD6BE">
 <h2>Background</h2>
 <ul>
-<li>Harassment on Twitter is well-documented</li>
+<li>Harassment of female politicians is well-documented (Wagner, 2020; Erikson et al., 2023)</li>
+<li>Intersection between climate change denialism and misogyny (Anshelm &amp; Hultman, 2014)</li>
+<li>Networked publics impact speech in the digital public sphere (boyd, 2010; Bruns, 2023)</li>
 </ul>
+</section>
+<section id="theoretical-framework" class="slide level2" data-background-color="#CBD6BE">
+<h2>Theoretical Framework</h2>
+<ul>
+<li>Theory of Deliberative Democracy</li>
+<li>Credited to Jürgen Habermas and Richard Sennet</li>
+<li>View on a scale; “to what extent” (Rossini, 2022)</li>
+</ul>
+</section>
+<section id="research-questions" class="slide level2" data-background-color="#CBD6BE">
+<h2>Research Questions</h2>
+<ol type="1">
+<li>What is the severity of harassment female politicians receive when Tweeting about climate change, the environment, or related topics?</li>
+<li>What types of accounts send harassing Tweets to female politicians?</li>
+</ol>
+</section>
+<section id="hypotheses" class="slide level2" data-background-color="#CBD6BE">
+<h2>Hypotheses</h2>
+<ol type="1">
+<li>Evidence of harassment will be detected in replies to Tweets that discuss climate change, the environment, or related topics.</li>
+<li>Personal and Anonymous accounts belonging to right-wing and ideologically-driven users will send Tweets containing the most harassment to the female politicians.</li>
+</ol>
+</section>
+<section id="methods" class="slide level2" data-background-color="#CBD6BE">
+<h2>Methods</h2>
+<ul>
+<li>Statistical programming software <code>R</code> (R Core Team, 2023)</li>
+<li>R Package for collecting Twitter threaded conversations: <code>voson.tcn</code> (Gertzel, 2021)</li>
+<li>Manual coding using a Google Form</li>
+</ul>
+</section>
+<section id="my-sample" class="slide level2" data-background-color="#CBD6BE">
+<h2>My Sample</h2>
 <div class="cell">
 <div class="cell-output-display">
-<table data-quarto-postprocess="true">
+<table class="table" data-quarto-postprocess="true" style="font-size: 30px; margin-left: auto; margin-right: auto;">
 <thead>
 <tr class="header">
 <th style="text-align: left;" data-quarto-table-cell-role="th">Name of Politician</th>
@@ -376,6 +414,215 @@ Inessa De Angelis
 
 </div>
 </div>
+</section>
+<section id="severity-of-harassment" class="slide level2" data-background-color="#CBD6BE">
+<h2>Severity of Harassment</h2>
+<ol type="1">
+<li>Positive</li>
+<li>Neutral</li>
+<li>Questioning authority</li>
+<li>Name-calling/Gender insults</li>
+<li>Vicious language</li>
+<li>Credible threats</li>
+<li>Hate speech</li>
+</ol>
+</section>
+<section id="type-of-account" class="slide level2" data-background-color="#CBD6BE">
+<h2>Type of Account</h2>
+<ol type="1">
+<li>Personal</li>
+<li>Professional</li>
+<li>Bots</li>
+<li>Spammers</li>
+<li>Anonymous</li>
+<li>Suspended/deleted</li>
+</ol>
+</section>
+<section id="bayesian-hierarchical-model" class="slide level2" data-background-color="#CBD6BE">
+<h2>Bayesian Hierarchical Model</h2>
+<div class="r-fit-text">
+<p><span class="math display">\[
+\begin{aligned}
+y_i|\pi_i &amp; \sim \mbox{Bern}(\pi_i) \\
+\mbox{logit}(\pi_i) &amp; = \beta_0 + \alpha_{a[i]}^{\mbox{account}} + \alpha_{p[i]}^{\mbox{politician}} + \alpha_{v[i]}^{\mbox{verified}} \\
+\alpha_0 &amp; \sim \mbox{Normal}(0, 2.5)\\
+\alpha_{a}^{\mbox{acc}} &amp; \sim \mbox{Normal}\left(0, \sigma^2_{\mbox{acc}}\right)\mbox{ for }a = 1, 2, \dots, A\\
+\alpha_{p}^{\mbox{pol}} &amp; \sim \mbox{Normal}\left(0, \sigma^2_{\mbox{pol}}\right)\mbox{ for }p = 1, 2, 3, P\\
+\alpha_{v}^{\mbox{ver}} &amp; \sim \mbox{Normal}\left(0, \sigma^2_{\mbox{ver}}\right)\mbox{ for }v = 0, 1, V\\
+\sigma_{\mbox{acc}} &amp; \sim \mbox{Exponential}(1)\\
+\sigma_{\mbox{pol}} &amp; \sim \mbox{Exponential}(1) \\
+\sigma_{\mbox{ver}} &amp; \sim \mbox{Exponential}(1)
+\end{aligned}
+\]</span></p>
+</div>
+</section>
+<section id="results-model" class="slide level2" data-background-color="#CBD6BE">
+<h2>Results (Model)</h2>
+
+<img data-src="Bell_Conference_Slides_files/figure-revealjs/fig-plotted-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;1: Predicting whether a Tweet contains harassment or not, on the basis of the type of account behind the Tweet, which politician the Tweet was in response to, and whether a user is verified.</p></section>
+<section id="results-coding" class="slide level2" data-background-color="#CBD6BE">
+<h2>Results (Coding)</h2>
+<div class="r-fit-text">
+<div class="cell">
+<div class="cell-output-display">
+<table class="table" data-quarto-postprocess="true" style="font-size: 30px; margin-left: auto; margin-right: auto;">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Severity of Harassment</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Number of Replies</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Percentage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Positive</td>
+<td style="text-align: right;">44</td>
+<td style="text-align: left;">1%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Neutral</td>
+<td style="text-align: right;">542</td>
+<td style="text-align: left;">13%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Questioning Authority</td>
+<td style="text-align: right;">2284</td>
+<td style="text-align: left;">55%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Name-calling/Gender insults</td>
+<td style="text-align: right;">1060</td>
+<td style="text-align: left;">26%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Vicious language</td>
+<td style="text-align: right;">144</td>
+<td style="text-align: left;">3%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Credible threats</td>
+<td style="text-align: right;">33</td>
+<td style="text-align: left;">1%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Hate speech</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: left;">1%</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+</section>
+<section id="results-coding-1" class="slide level2" data-background-color="#CBD6BE">
+<h2>Results (Coding)</h2>
+<div class="r-fit-text">
+<div class="cell">
+<div class="cell-output-display">
+<table class="table" data-quarto-postprocess="true" style="font-size: 30px; margin-left: auto; margin-right: auto;">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Type of Account</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Number of Accounts</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Percentage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Personal</td>
+<td style="text-align: right;">802</td>
+<td style="text-align: left;">19%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Professional</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: left;">1%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Bots</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: left;">0%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Spammers</td>
+<td style="text-align: right;">1701</td>
+<td style="text-align: left;">41%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Anonymous</td>
+<td style="text-align: right;">1515</td>
+<td style="text-align: left;">37%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Suspended/deleted</td>
+<td style="text-align: right;">66</td>
+<td style="text-align: left;">2%</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+</section>
+<section id="discussion-questioning-authority" class="slide level2" data-background-color="#CBD6BE">
+<h2>Discussion: Questioning Authority</h2>
+<table>
+<caption>A Tweet categorized as <strong>Questioning authority</strong> sent to MP May.</caption>
+<colgroup>
+<col style="width: 100%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Tweet</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>@ElizabethMay Do you remember the acid rain crisis - just about killed us all; then the ozone hole..how we survived? And the ice caps melting..good thing coast didn’t get submersed. Now this time can you show legitimate science? No hey? Weird, climatologists have expertise that disagrees</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="discussion-type-of-accounts" class="slide level2" data-background-color="#CBD6BE">
+<h2>Discussion: Type of Accounts</h2>
+<ul>
+<li>More Spammers and Anonymous accounts than anticipated</li>
+<li>Fewer Suspended/deleted accounts</li>
+<li>Professional accounts often belonged to Federal Conservative MPs</li>
+</ul>
+</section>
+<section id="discussion-hate-speech" class="slide level2" data-background-color="#CBD6BE">
+<h2>Discussion: Hate Speech</h2>
+
+<img data-src="hate_speech_example.png" width="400" class="r-stretch quarto-figure-center"><p class="caption">Example of a reply to a Tweet sent by DPM Freeland which revives historical photographs through memes and contains <strong>Hate Speech</strong></p></section>
+<section id="deliberative-democracy" class="slide level2" data-background-color="#CBD6BE">
+<h2>Deliberative Democracy</h2>
+<ul>
+<li>MP May’s account best fulfills the definition</li>
+<li>MP Collins’ account mostly fulfills the definition</li>
+<li>DPM Freeland’s account does not</li>
+</ul>
+</section>
+<section id="why-this-matters" class="slide level2" data-background-color="#CBD6BE">
+<h2>Why this matters</h2>
+<ul>
+<li>Future of democratic conversations online</li>
+<li>We cannot let female politicians self-censor or be deterred from running for office</li>
+<li>Issue salience: continued conversations about climate change in traditional and social media</li>
+</ul>
+</section>
+<section id="thank-you" class="slide level2 smaller" data-background-color="#CBD6BE">
+<h2>Thank You</h2>
+<ul>
+<li>Code, select data, and paper available: <a href="https://github.com/InessaDeAngelis/torrential_twitter_bell_conf" class="uri">https://github.com/InessaDeAngelis/torrential_twitter_bell_conf</a></li>
+<li>Questions, comments, and feedback welcome: <a href="mailto:Inessa.DeAngelis@mail.utoronto.ca" class="email">Inessa.DeAngelis@mail.utoronto.ca</a></li>
+<li>Find me on GitHub &amp; Twitter: <strong>@InessaDeAngelis</strong></li>
+</ul>
 <div class="footer footer-default">
 
 </div>
