@@ -4,10 +4,16 @@ author:
   name: "Inessa De Angelis"
   email: "Inessa.DeAngelis@mail.utoronto.ca"
 format:
-  revealjs
+  revealjs:
+    slide-number: true
 title-slide-attributes: 
   data-background-color: "#CBD6BE"
 ---
+
+## Key Findings {background-color="#CBD6BE"}
+- 86% of Tweets contained some form of harassment 
+- Identified clear violations of Twitter’s Rules and Policies  
+- Threat to female politicians and the future of online democratic conversations
 
 ## Background {background-color="#CBD6BE"}
 - Harassment of female politicians is well-documented (Wagner, 2020; Erikson et al., 2023)
@@ -73,6 +79,20 @@ finalized_cleaned_tweets |>
   5. Vicious language
   6. Credible threats
   7. Hate speech
+  
+## Sample Tweet: Questioning Authority {background-color="#CBD6BE"}
+| Tweet                                                                  |
+|------------------------------------------------------------------------|
+| \@ElizabethMay Do you remember the acid rain crisis - just about killed us all; then the ozone hole..how we survived? And the ice caps melting..good thing coast didn’t get submersed.  Now this time can you show legitimate science? No hey? Weird, climatologists have expertise that disagrees |
+
+: A Tweet categorized as **Questioning authority** sent to MP May.
+
+## Sample Tweet: Name-calling/Gender insults {background-color="#CBD6BE"}
+| Tweet                                                                  |
+|------------------------------------------------------------------------|
+| \@Laurel_BC \@thenarwhalca Arson my dear. Not climate, CRIMINAL. What the 🤬 is wrong with BC they keep voting NDP. Seriously!? 🤦🏻‍♀️ |
+
+: A **Name-calling/Gender insults** Tweet sent to MP Collins.
 
 ## Type of Account {background-color="#CBD6BE"}
   1. Personal
@@ -87,14 +107,7 @@ finalized_cleaned_tweets |>
 $$
 \begin{aligned}
 y_i|\pi_i & \sim \mbox{Bern}(\pi_i) \\
-\mbox{logit}(\pi_i) & = \beta_0 + \alpha_{a[i]}^{\mbox{account}} + \alpha_{p[i]}^{\mbox{politician}} + \alpha_{v[i]}^{\mbox{verified}} \\
-\alpha_0 & \sim \mbox{Normal}(0, 2.5)\\
-\alpha_{a}^{\mbox{acc}} & \sim \mbox{Normal}\left(0, \sigma^2_{\mbox{acc}}\right)\mbox{ for }a = 1, 2, \dots, A\\
-\alpha_{p}^{\mbox{pol}} & \sim \mbox{Normal}\left(0, \sigma^2_{\mbox{pol}}\right)\mbox{ for }p = 1, 2, 3, P\\
-\alpha_{v}^{\mbox{ver}} & \sim \mbox{Normal}\left(0, \sigma^2_{\mbox{ver}}\right)\mbox{ for }v = 0, 1, V\\
-\sigma_{\mbox{acc}} & \sim \mbox{Exponential}(1)\\
-\sigma_{\mbox{pol}} & \sim \mbox{Exponential}(1) \\
-\sigma_{\mbox{ver}} & \sim \mbox{Exponential}(1)
+\mbox{logit}(\pi_i) & = \beta_0 + \alpha_{a[i]}^{\mbox{account}} + \alpha_{p[i]}^{\mbox{politician}} + \alpha_{v[i]}^{\mbox{verified}}
 \end{aligned}
 $$
 :::
@@ -118,19 +131,21 @@ harassment_model_predictions <-
 
 harassment_model_predictions |>
   ggplot(aes(x = harassment_binary, y = estimate, color = name_of_politician)) +
-  geom_jitter(width = 0.2, height = 0.0, alpha = 0.3) +
+  geom_jitter(width = 0.2, height = 0.01, alpha = 0.3) +
   labs(
     x = "Harassment",
-    y = "Estimated probability that a Tweet contains harassment",
+    y = "Estimated probability that a \nTweet contains harassment",
     color = "Name of Politician"
   ) +
   theme_classic() +
-  theme(axis.text.x = element_text(angle=45, hjust = 1, size = 8)) + 
-  theme(axis.text.y = element_text(size = 8)) + 
-  theme(axis.title.y = element_text(size = 8)) +
+  theme(axis.text.x = element_text(angle=45, hjust = 1, size = 14)) + 
+  theme(axis.text.y = element_text(size = 14)) + 
+  theme(axis.text.x = element_text(size = 14)) +
+  theme(axis.title.y = element_text(size = 20)) +
+  theme(axis.title.x = element_text(size = 20)) +
   theme(legend.position = "bottom") +
-  theme(legend.text = element_text(size = 6)) +
-  theme(legend.title = element_text(size = 9)) 
+  theme(legend.text = element_text(size = 12)) +
+  theme(legend.title = element_text(size = 16)) 
 
 ```
 
@@ -206,11 +221,9 @@ finalized_cleaned_tweets |>
 :::
 
 ## Discussion: Questioning Authority {background-color="#CBD6BE"}
-| Tweet                                                                  |
-|------------------------------------------------------------------------|
-| \@ElizabethMay Do you remember the acid rain crisis - just about killed us all; then the ozone hole..how we survived? And the ice caps melting..good thing coast didn’t get submersed.  Now this time can you show legitimate science? No hey? Weird, climatologists have expertise that disagrees |
-
-: A Tweet categorized as **Questioning authority** sent to MP May.
+- 55% of Tweets were categorized as Questioning authority 
+- Not information-seeking questions or an accountability mechanism 
+- Focused on undermining and discrediting 
 
 ## Discussion: Type of Accounts {background-color="#CBD6BE"}
 - More Spammers and Anonymous accounts than anticipated
@@ -226,7 +239,13 @@ finalized_cleaned_tweets |>
 - MP Collins' account mostly fulfills the definition 
 - DPM Freeland's account does not 
 
-## Why this matters {background-color="#CBD6BE"}
+## Limitations {background-color="#CBD6BE"}
+- Not representative of the larger public (Bermingham & Smeaton, 2011)
+- Twitter promotes the most active and polarized users (McGregor, 2020)
+- Ever-changing platform affordances 
+- No intercoder reliability yet (Krippendorff, 2013)
+
+## Why This Matters {background-color="#CBD6BE"}
 - Future of democratic conversations online
 - We cannot let female politicians self-censor or be deterred from running for office 
 - Issue salience: continued conversations about climate change in traditional and social media

@@ -342,6 +342,15 @@ Inessa De Angelis
 </div>
 
 </section>
+<section id="key-findings" class="slide level2" data-background-color="#CBD6BE">
+<h2>Key Findings</h2>
+<ul>
+<li>86% of Tweets contained some form of harassment</li>
+<li>Identified clear violations of Twitter’s Rules and Policies<br>
+</li>
+<li>Threat to female politicians and the future of online democratic conversations</li>
+</ul>
+</section>
 <section id="background" class="slide level2" data-background-color="#CBD6BE">
 <h2>Background</h2>
 <ul>
@@ -427,6 +436,44 @@ Inessa De Angelis
 <li>Hate speech</li>
 </ol>
 </section>
+<section id="sample-tweet-questioning-authority" class="slide level2" data-background-color="#CBD6BE">
+<h2>Sample Tweet: Questioning Authority</h2>
+<table>
+<caption>A Tweet categorized as <strong>Questioning authority</strong> sent to MP May.</caption>
+<colgroup>
+<col style="width: 100%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Tweet</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>@ElizabethMay Do you remember the acid rain crisis - just about killed us all; then the ozone hole..how we survived? And the ice caps melting..good thing coast didn’t get submersed. Now this time can you show legitimate science? No hey? Weird, climatologists have expertise that disagrees</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="sample-tweet-name-callinggender-insults" class="slide level2" data-background-color="#CBD6BE">
+<h2>Sample Tweet: Name-calling/Gender insults</h2>
+<table>
+<caption>A <strong>Name-calling/Gender insults</strong> Tweet sent to MP Collins.</caption>
+<colgroup>
+<col style="width: 100%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Tweet</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>@Laurel_BC @thenarwhalca Arson my dear. Not climate, CRIMINAL. What the 🤬 is wrong with BC they keep voting NDP. Seriously!? 🤦🏻‍♀️</td>
+</tr>
+</tbody>
+</table>
+</section>
 <section id="type-of-account" class="slide level2" data-background-color="#CBD6BE">
 <h2>Type of Account</h2>
 <ol type="1">
@@ -444,14 +491,7 @@ Inessa De Angelis
 <p><span class="math display">\[
 \begin{aligned}
 y_i|\pi_i &amp; \sim \mbox{Bern}(\pi_i) \\
-\mbox{logit}(\pi_i) &amp; = \beta_0 + \alpha_{a[i]}^{\mbox{account}} + \alpha_{p[i]}^{\mbox{politician}} + \alpha_{v[i]}^{\mbox{verified}} \\
-\alpha_0 &amp; \sim \mbox{Normal}(0, 2.5)\\
-\alpha_{a}^{\mbox{acc}} &amp; \sim \mbox{Normal}\left(0, \sigma^2_{\mbox{acc}}\right)\mbox{ for }a = 1, 2, \dots, A\\
-\alpha_{p}^{\mbox{pol}} &amp; \sim \mbox{Normal}\left(0, \sigma^2_{\mbox{pol}}\right)\mbox{ for }p = 1, 2, 3, P\\
-\alpha_{v}^{\mbox{ver}} &amp; \sim \mbox{Normal}\left(0, \sigma^2_{\mbox{ver}}\right)\mbox{ for }v = 0, 1, V\\
-\sigma_{\mbox{acc}} &amp; \sim \mbox{Exponential}(1)\\
-\sigma_{\mbox{pol}} &amp; \sim \mbox{Exponential}(1) \\
-\sigma_{\mbox{ver}} &amp; \sim \mbox{Exponential}(1)
+\mbox{logit}(\pi_i) &amp; = \beta_0 + \alpha_{a[i]}^{\mbox{account}} + \alpha_{p[i]}^{\mbox{politician}} + \alpha_{v[i]}^{\mbox{verified}}
 \end{aligned}
 \]</span></p>
 </div>
@@ -571,22 +611,11 @@ y_i|\pi_i &amp; \sim \mbox{Bern}(\pi_i) \\
 </section>
 <section id="discussion-questioning-authority" class="slide level2" data-background-color="#CBD6BE">
 <h2>Discussion: Questioning Authority</h2>
-<table>
-<caption>A Tweet categorized as <strong>Questioning authority</strong> sent to MP May.</caption>
-<colgroup>
-<col style="width: 100%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Tweet</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>@ElizabethMay Do you remember the acid rain crisis - just about killed us all; then the ozone hole..how we survived? And the ice caps melting..good thing coast didn’t get submersed. Now this time can you show legitimate science? No hey? Weird, climatologists have expertise that disagrees</td>
-</tr>
-</tbody>
-</table>
+<ul>
+<li>55% of Tweets were categorized as Questioning authority</li>
+<li>Not information-seeking questions or an accountability mechanism</li>
+<li>Focused on undermining and discrediting</li>
+</ul>
 </section>
 <section id="discussion-type-of-accounts" class="slide level2" data-background-color="#CBD6BE">
 <h2>Discussion: Type of Accounts</h2>
@@ -608,8 +637,17 @@ y_i|\pi_i &amp; \sim \mbox{Bern}(\pi_i) \\
 <li>DPM Freeland’s account does not</li>
 </ul>
 </section>
+<section id="limitations" class="slide level2" data-background-color="#CBD6BE">
+<h2>Limitations</h2>
+<ul>
+<li>Not representative of the larger public (Bermingham &amp; Smeaton, 2011)</li>
+<li>Twitter promotes the most active and polarized users (McGregor, 2020)</li>
+<li>Ever-changing platform affordances</li>
+<li>No intercoder reliability yet (Krippendorff, 2013)</li>
+</ul>
+</section>
 <section id="why-this-matters" class="slide level2" data-background-color="#CBD6BE">
-<h2>Why this matters</h2>
+<h2>Why This Matters</h2>
 <ul>
 <li>Future of democratic conversations online</li>
 <li>We cannot let female politicians self-censor or be deterred from running for office</li>
@@ -679,7 +717,7 @@ y_i|\pi_i &amp; \sim \mbox{Bern}(\pi_i) \\
         progress: true,
 
         // Display the page number of the current slide
-        slideNumber: false,
+        slideNumber: 'c/t',
 
         // 'all', 'print', or 'speaker'
         showSlideNumber: 'all',
