@@ -165,7 +165,7 @@ In this study, I adopt a "to what extent" perspective. This perspective aligns w
 
 ## Data Collection 
 
-All Twitter data was collected using the statistical programming software R [@r] and functions from `voson.tcn` [@gertzel2021] and the `tidyverse` [@rTidyverse]. Paid access to Twitter's Basic v2 Application Programming Interface (API) endpoint was obtained before using the advanced search feature to determine which Tweets I wanted to download via the API. My sample includes any original Tweets written in English (no quote or Retweets) that originated on the accounts of DPM Freeland (\@cafreeland), MP May (\@elizabethmay), and MP Collins (\@laurel_bc) that were posted between September 1, 2022, and October 31, 2023. These three politicians were selected based on their pro-climate change stances, evidence of harassing Tweets, and diversity in regional representation and political affiliation. Only 6% of female MPs identify as a visible minority or Indigenous and do not frequently discuss climate change on Twitter, which is why my sample contains only white MPs [@hoc]. Tweets also had to the contain the word "climate," "environment," and/or "environmental" (in text or as a hashtag). For threaded Tweets sent by the politicians, the first Tweet of the thread had to contain at least one of the key words and the overall focus of the thread had to be on climate change and/or environmental policy. Key words were also checked for applicability, given the use of words such as "climate" and "environment" to reference geopolitics and economic situations and not actual climate or environmental policy. Within the parameters of the sample, all Tweets were from September 2022 to October 2023. DPM Freeland's Tweets had either the key word "climate" or "environment." MP May and MP Collins' Tweets included the words "climate," "environment," and "environmental." 
+All Twitter data was collected using the statistical programming software R [@r] and functions from `voson.tcn` [@gertzel2021] and the `tidyverse` [@rTidyverse]. Paid access to Twitter's Basic v2 Application Programming Interface (API) endpoint was obtained before using the advanced search feature to determine which Tweets I wanted to download via the API. My sample includes any original Tweets written in English (no quote or Retweets) that originated on the accounts of DPM Freeland (\@cafreeland), MP May (\@elizabethmay), and MP Collins (\@laurel_bc) that were posted between September 1, 2022, and October 31, 2023. These three politicians were selected based on their pro-climate change stances, evidence of harassing Tweets, and diversity in regional representation and political affiliation. Only 6% of female MPs identify as a visible minority or Indigenous and do not frequently discuss climate change on Twitter, which is why my sample contains only white MPs [@hoc]. Tweets also had to the contain the word "climate," "environment," and/or "environmental" (in text or as a hashtag). For threaded Tweets sent by the politicians, the first Tweet of the thread had to contain at least one of the key words and the overall focus of the thread had to be on climate change and/or environmental policy. Key words were also checked for applicability, given the use of words such as "climate" and "environment" to reference geopolitics and economic situations and not actual climate or environmental policy. DPM Freeland's Tweets had either the key word "climate" or "environment." MP May and MP Collins' Tweets included the words "climate," "environment," and "environmental." 
 
 I ultimately collected 11 original Tweets from DPM Freeland, 32 original Tweets from MP May, and 25 original Tweets from MP Collins. Between all the original Tweets and replies, there were 2,424 Tweets for DPM Freeland, 1,094 Tweets for MP May, and 711 Tweets for MP Collins for a total of 4,229, before cleaning the datasets. The distribution of the number of original Tweets and associated replies was anticipated, given @rheault finding that status and visibility impact the quantity of harassment faced by Canadian politicians.
 
@@ -593,17 +593,17 @@ harassment_model <- readRDS(here::here("Outputs/Model/harassment_model.rds"))
 harassment_model_predictions <-
   predictions(harassment_model) 
 
-ggplot(harassment_model_predictions, aes(verified, estimate)) +
+ggplot(harassment_model_predictions, aes(harassment_binary, estimate)) +
   geom_jitter(aes(colour = factor(name_of_politician))) +
-  facet_wrap(harassment_binary ~type_of_account) +
+  facet_wrap(verified ~type_of_account) +
   labs(
-    x = "Whether an account is verified",
+    x = "Whether a Tweet contains harassment",
     y = "Estimated probability that a \nTweet contains harassment",
     color = "Name of Politician"
   ) +
   theme(legend.position = "bottom") +
   theme(axis.text.x = element_text(angle=45, hjust = 1, size = 7)) +
-  theme(axis.text.y = element_text(size = 7)) + 
+  theme(axis.text.y = element_text(size = 6)) + 
   scale_colour_manual(values = c("darkblue", "darkcyan", "yellow"))
 
 ```
