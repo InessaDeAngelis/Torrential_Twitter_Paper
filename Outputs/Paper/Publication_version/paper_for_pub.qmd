@@ -149,7 +149,7 @@ The original mindset for the development of the internet in the second half of t
 
 ## Harassment of Women in Politics 
 
-Gender-based harassment and gendertrolling on Twitter is well-documented in the literature [@mediatingmisogyny; @carlson; @trifiro; @mantilla2013]. Previous research has started distinguishing traits of harassment based on a politician's status and visibility in politics and across traditional and social media. Blatant harassment is most likely to impact politicians of higher status and visibility, such as Cabinet Ministers [@rheault], while harassment of backbench MPs is often through more subtle, everyday microaggressions [@harmer]. Both  @collignon2020 and @erikson found that the intersection between a politician's age, gender, and political affiliation largely determines the type and frequency of harassment they face, leading to younger, female politicians more frequently receiving harassing messages than older politicians. Widespread and systematic harassment threatens meaningful political participation by women, the nature of policy debates in the House of Commons, and the future of democracy [@southern; @degeus]. While it is difficult to know precisely which combination of characteristics contribute to the intensity of harassment in the digital public sphere, harassment continues to be used as an equalizing force to silence the voices of women and maintain the status quo [@mantilla2015; @mccrightdunlap].
+Gender-based harassment and gendertrolling on Twitter is well documented in the literature [@mediatingmisogyny; @carlson; @trifiro; @mantilla2013]. Previous research has started distinguishing traits of harassment based on a politician's status and visibility in politics and across traditional and social media. Blatant harassment is most likely to impact politicians of higher status and visibility, such as Cabinet Ministers [@rheault], while harassment of backbench MPs is often through more subtle, everyday microaggressions [@harmer]. Both  @collignon2020 and @erikson found that the intersection between a politician's age, gender, and political affiliation largely determines the type and frequency of harassment they face, leading to younger, female politicians more frequently receiving harassing messages than older politicians. Female politicians of color, often face more harassment than any other group [@mediatingmisogyny]. Widespread and systematic harassment threatens meaningful political participation by women, the nature of policy debates in the House of Commons, and the future of democracy [@southern; @degeus]. While it is difficult to know precisely which combination of characteristics contribute to the intensity of harassment in the digital public sphere, harassment continues to be used as an equalizing force to silence the voices of women and maintain the status quo [@mantilla2015; @mccrightdunlap].
 
 # Theoretical Framework
 
@@ -191,6 +191,7 @@ finalized_cleaned_tweets |>
   kable(
     col.names = c("Name of Politician", "Number of Replies", "Percentage"),
     booktabs = TRUE,
+    linesep = ""
   ) 
 
 ```
@@ -224,6 +225,8 @@ There are several restrictions placed on the storage and sharing of data collect
 #| label: tbl-severity
 #| tbl-cap: Breakdown of Severity of Harassment on the seven-point scale detected in Tweets to all three politicians
 
+# This code fixed the gap issue! https://stackoverflow.com/questions/67365583/extra-white-space-after-knitting-in-rmarkdown
+
 finalized_cleaned_tweets |>
   group_by(severity_of_harassment) |>
   count() |>
@@ -233,6 +236,7 @@ finalized_cleaned_tweets |>
   kable(
     col.names = c("Severity of Harassment", "Number of Replies", "Percentage"),
     booktabs = TRUE,
+    linesep = "" 
   ) 
 ```
 
@@ -247,6 +251,8 @@ Among the 4,139 Tweets from the three female politicians, 2,284 (55%) were ident
 #| label: tbl-accounts
 #| tbl-cap: Breakdown of Type of Accounts detected in replies to all three female politicians
 
+# This code fixed the gap issue! https://stackoverflow.com/questions/67365583/extra-white-space-after-knitting-in-rmarkdown
+
 finalized_cleaned_tweets |>
   group_by(type_of_account) |>
   count() |>
@@ -256,6 +262,7 @@ finalized_cleaned_tweets |>
   kable(
     col.names = c("Type of Account", "Number of Accounts", "Percentage"),
     booktabs = TRUE,
+    linesep = ""
   ) 
 
 ```
@@ -307,6 +314,7 @@ finalized_cleaned_tweets |>
   kable(
     col.names = c("Severity of Harassment", "Number of Accounts", "Percentage"),
     booktabs = TRUE,
+    linesep = ""
   ) 
 ```
 
@@ -329,6 +337,7 @@ finalized_cleaned_tweets |>
   kable(
     col.names = c("Type of Account", "Number of Accounts", "Percentage"),
     booktabs = TRUE,
+    linesep = ""
   )
 
 ```
@@ -382,6 +391,7 @@ finalized_cleaned_tweets |>
   kable(
     col.names = c("Severity of Harassment", "Number of Accounts", "Percentage"),
     booktabs = TRUE,
+    linesep = ""
   ) 
 ```
 
@@ -404,6 +414,7 @@ finalized_cleaned_tweets |>
   kable(
     col.names = c("Type of Account", "Number of Accounts", "Percentage"),
     booktabs = TRUE,
+    linesep = ""
   )
 
 ```
@@ -457,6 +468,7 @@ finalized_cleaned_tweets |>
   kable(
     col.names = c("Severity of Harassment", "Number of Accounts", "Percentage"),
     booktabs = TRUE,
+    linesep = ""
   ) 
 ```
 
@@ -479,6 +491,7 @@ finalized_cleaned_tweets |>
   kable(
     col.names = c("Type of Account", "Number of Accounts", "Percentage"),
     booktabs = TRUE,
+    linesep = ""
   )
 
 ```
@@ -513,7 +526,7 @@ finalized_cleaned_tweets |>
 
 # Model
 
-This model investigates the combination of the type of account a user has, whether they are verified, and which politician they are replying to in order to predict if they are more likely to send a harassing Tweet. Historically, accounts with the blue checkmark/tick were regarded as credible individuals and/or organizations, sharing legitimate information [@unverified]. However, since Musk introduced changes to Twitter's verification policy in April 2023, the @CCDHreport found that 99% of online hate was spread by malicious users who paid to be verified, allowing for circumvention of content moderation rules. Bayesian hierarchical modeling using the statistical programming language R [@r], employing `rstanarm` [@rstanarm], `marginaleffects` [@marginal], and `modelsummary` [@modelsummary] can help predict and further investigate this relationship. The model was fit using `rstanarm` [@rstanarm]. For the priors, I followed the standard weakly informed prior distributions by using the normal definition with mean 0 and standard deviation 2.5 as used in the `rstanarm` package.
+This model investigates the combination of the type of account a user has, whether they are verified, and which politician they are replying to in order to predict if they are more likely to send a harassing Tweet. Historically, accounts with the blue checkmark/tick were regarded as credible individuals and/or organizations, sharing legitimate information [@unverified]. However, since Musk introduced changes to Twitter's verification policy in April 2023, the @CCDHreport found that 99% of online hate was spread by malicious users who paid to be verified, allowing for circumvention of content moderation rules. Bayesian hierarchical modeling using the statistical programming language R [@r], employing `rstanarm` [@rstanarm], `marginaleffects` [@marginal], and `modelsummary` [@modelsummary] can help predict and further investigate this relationship. The model was fit using `rstanarm` [@rstanarm]. For the priors, I followed the standard weakly informed prior distributions by using the normal definition with mean 0 and standard deviation 2.5 as used in the `rstanarm` package. The model is: 
 
 $$
 \begin{aligned}
@@ -527,7 +540,7 @@ y_i|\pi_i & \sim \mbox{Bern}(\pi_i) \\
 \sigma_{\mbox{pol}} & \sim \mbox{Exponential}(1) \\
 \sigma_{\mbox{ver}} & \sim \mbox{Exponential}(1)
 \end{aligned}
-$$ Where $y_i$ is whether a Tweet contained harassment, $\pi_i = \mbox{Pr}(y_i=1)$, and $\alpha^{\mbox{account}}$, $\alpha^{\mbox{politician}}$, and $\alpha^{\mbox{verified}}$ and are the effect of the type of account a user has, which politician they are replying to, and whether their account is verified. The $a[i]$, $p[i]$, and $v[i]$ refer to which type of account, which politician, and whether a user is verified. $A$, $P$, and $V$ are the total number of types of accounts, politicians, and verification options, respectively. The binary response variable, called `harassment_binary`, has a value of 0 if a Tweet does not contain harassment and a value of 1 if it contains harassment. The Positive and Neutral categories on my seven-point scale make up the value of 0 and all remaining categories (Questioning authority through Hate speech) make up the value of 1.
+$$ Where $y_i$ is whether a Tweet contained harassment, $\pi_i = \mbox{Pr}(y_i=1)$, and $\alpha^{\mbox{account}}$, $\alpha^{\mbox{politician}}$, and $\alpha^{\mbox{verified}}$ are the effect of the type of account a user has, which politician they are replying to, and whether their account is verified. The $a[i]$, $p[i]$, and $v[i]$ refer to which type of account, which politician, and whether a user is verified. $A$, $P$, and $V$ are the total number of types of accounts, politicians, and verification options, respectively. The Positive and Neutral categories on my seven-point scale make up the value of 0 and all remaining categories (Questioning authority through Hate speech) make up the value of 1.  The binary response variable, $y_i$, is called `harassment_binary` and has a value of 0 if a Tweet does not contain harassment and a value of 1 if it contains harassment. 
 
 ```{r}
 #| echo: false
@@ -542,7 +555,7 @@ harassment_model <- readRDS(here::here("Outputs/Model/harassment_model.rds"))
 modelsummary(list(harassment_model)) 
 
 ```
-@tbl-modsummary presents the estimates generated by the model. For ease of analysis, @tbl-marginal displays the estimates as predictions in a table and @fig-plotted shows the predictions graphed.
+@tbl-modsummary presents the estimates generated by the model. For ease of analysis, @tbl-marginal displays the estimates as predictions in a table and @fig-plotted2 shows the predictions graphed.
 
 ```{r}
 #| echo: false
@@ -558,18 +571,19 @@ slopes(harassment_model, newdata = "median") |>
   select(term, contrast, estimate) |>
   kable(
     col.names = c("Term", "Contrast", "Estimate"),
-    digits = 2, booktabs = TRUE
+    digits = 2, 
+    booktabs = TRUE,
+    linesep = ""
   )
 
 ```
-
 
 @tbl-marginal predicts whether a user is likely to send replies that contain harassment as a function of their type of account, whether their account is verified, and which female politician they are replying to. When compared to DPM Freeland, Tweets sent to MP May are an estimated 2% more likely to not contain harassment, while MP Collins is an estimated 6% more likely to receive Tweets that do not contain harassment in comparison to DPM Freeland. For type of account, when personal accounts are compared to professional accounts, professional accounts are an estimated 13% less likely to send Tweets that do not contain harassment. Bots, when compared to personal accounts, are an estimated 8% more likely to send Tweets that do not contain harassment, while Spammers are an estimated 11% and Anonymous accounts an an estimated 12% more likely to send Tweets which do not contain harassment. Suspended/deleted accounts are an estimated 3% more likely send Tweets that do not contain harassment in comparison to personal accounts. The model is unable to find a quantitative difference in whether users who are verified or not verified are more likely to send harassing Tweets. The results from the model suggest that despite differences in status and political affiliation across the three politicians, they are almost equally impacted by harassment on Twitter. Moreover, all types of accounts are predisposed to sending harassing Tweets, especially Professional accounts, which will be explored in my [Discussion] section.
 
 ```{r}
 #| echo: false
 #| eval: true
-#| label: fig-plotted
+#| label: fig-plotted2
 #| fig-cap: Predicting whether a Tweet contains harassment or not, on the basis of the type of account behind the Tweet, which politician the Tweet was in response to, and whether a user is verified.
 #| message: false
 #| warning: false
@@ -579,23 +593,18 @@ harassment_model <- readRDS(here::here("Outputs/Model/harassment_model.rds"))
 harassment_model_predictions <-
   predictions(harassment_model) 
 
-harassment_model_predictions |>
-  ggplot(aes(x = harassment_binary, y = estimate, color = name_of_politician)) +
-  geom_jitter(width = 0.2, height = 0.0, alpha = 0.3) +
+ggplot(harassment_model_predictions, aes(verified, estimate)) +
+  geom_jitter(aes(colour = factor(name_of_politician))) +
+  facet_wrap(harassment_binary ~type_of_account) +
   labs(
-    x = "Contains Harassment",
-    y = "Estimated probability that a Tweet \ncontains harassment",
+    x = "Whether an account is verified",
+    y = "Estimated probability that a \nTweet contains harassment",
     color = "Name of Politician"
   ) +
-  theme_classic() +
-  theme(axis.text.x = element_text(angle=45, hjust = 1, size = 10)) + 
-  theme(axis.text.y = element_text(size = 10)) + 
-  theme(axis.text.x = element_text(size = 10)) +
-  theme(axis.title.y = element_text(size = 12)) +
-  theme(axis.title.x = element_text(size = 12)) +
   theme(legend.position = "bottom") +
-  theme(legend.text = element_text(size = 6)) +
-  theme(legend.title = element_text(size = 9)) 
+  theme(axis.text.x = element_text(angle=45, hjust = 1, size = 7)) +
+  theme(axis.text.y = element_text(size = 7)) + 
+  scale_colour_manual(values = c("darkblue", "darkcyan", "yellow"))
 
 ```
 
@@ -643,7 +652,7 @@ combined_apple_data |>
 
 ## Chrystia Freeland 
 
-DPM Freeland's results for severity of harassment and type of account are largely consistent previous research into the harassment faced by eminent female politicians [@rheault]. The use of memes, to undermine and harass DPM Freeland prominently features in her sample of Tweets. The term, meme, was first used by evolutionary biologist Richard Dawkins in 1976 and is "... derived from the Greek *mimema*, meaning 'something imitated'; the current usage refers to an idea or bit of content that spreads widely through cyberspace" [@bauman, pp. 87-88]. The memes in DPM Freeland's sample are often unflattering photographs of her, presenting anti-feminist narratives, and intending to undermine her based on her physical appearance [@ging]. There was no evidence of deepfakes or highly sophisticated manipulated audiovisual content detected in DPM Freeland's sample [@appel]. Moreover, historical pictures from Nazi Germany in the 1930s/1940s were memed to include the faces of DPM Freeland and sometimes Prime Minister Rt. Hon. Justin Trudeau and NDP Leader Jagmeet Singh, aligning with research conducted by @frosh which reveals that the revival of historic photographs in the form of memes bolsters public discussion and draws symbolic connections between the past and present. The memes sent in response to Tweets by DPM Freeland are similar to anti-suffragette posters circulating in the early twentieth century which intended to undermine women campaigning for the right to vote and discourage the voices of women in the public sphere [@ging; @mckaytenove]. Memes and photographs, including the one below, are subjected to Twitter’s content moderation rules, as hate speech can be expressed through symbols and images, yet continue to freely circulate on the platform [@Twittermedia; @carlson]. 
+DPM Freeland's results for severity of harassment and type of account are largely consistent with previous research into the harassment faced by eminent female politicians [@rheault]. The use of memes, to undermine and harass DPM Freeland prominently features in her sample of Tweets. The term, meme, was first used by evolutionary biologist Richard Dawkins in 1976 and is "... derived from the Greek *mimema*, meaning 'something imitated'; the current usage refers to an idea or bit of content that spreads widely through cyberspace" [@bauman, pp. 87-88]. The memes in DPM Freeland's sample are often unflattering photographs of her, presenting anti-feminist narratives, and intending to undermine her based on her physical appearance [@ging]. There was no evidence of deepfakes or highly sophisticated manipulated audiovisual content detected in DPM Freeland's sample [@appel]. Moreover, historical pictures from Nazi Germany in the 1930s/1940s were memed to include the faces of DPM Freeland and sometimes Prime Minister Rt. Hon. Justin Trudeau and NDP Leader Jagmeet Singh, aligning with research conducted by @frosh which reveals that the revival of historic photographs in the form of memes bolsters public discussion and draws symbolic connections between the past and present. The memes sent in response to Tweets by DPM Freeland are similar to anti-suffragette posters circulating in the early twentieth century which intended to undermine women campaigning for the right to vote and discourage the voices of women in the public sphere [@ging; @mckaytenove]. Memes and photographs, including the one below, are subjected to Twitter’s content moderation rules, as hate speech can be expressed through symbols and images, yet continue to freely circulate on the platform [@Twittermedia; @carlson]. 
 
 ![Example of a reply to a Tweet sent by DPM Freeland which revives historical photographs through memes and contains **Hate Speech**](hate_speech_example.png){width="400"}
 
@@ -690,7 +699,7 @@ The Tweets analyzed for this study generally match the criteria of what constitu
 The author thanks Rohan Alexander for the helpful suggestions and feedback on drafts of this paper and Elizabeth Dubois for guidance during the early conception of this study. The author also thanks Sarah Xie and Allyson Cui for their research assistance. 
 
 # Funding 
-The authors discloses receipt of the following financial support for the research, authorship, and/or publication of this article: This study was funded by the Social Sciences and Humanities Research Council of Canada (grant ID: 766-2022-0719) and the Government of Ontario, *2023-2024 Ontario Graduate Scholarship*.  
+The author discloses receipt of the following financial support for the research, authorship, and/or publication of this article: This study was funded in part by the Social Sciences and Humanities Research Council of Canada (grant ID: 766-2022-0719) and the Government of Ontario, *2023-2024 Ontario Graduate Scholarship*.  
 
 # Declaration of Conflicting Interests
 The author declares that there is no conflict of interest.
